@@ -5,12 +5,12 @@ body {
 
 h1 {text-align: center;}
 
-button {
+#add-me-button{
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 20px; 
 }
 
-div {
+#item{
     text-align: center;
     word-spacing: 60px;
     border-radius: 12px;
@@ -24,4 +24,31 @@ div {
     margin-right: auto;
     width: 200px;
     height: 30px;
+}
+
+#milk-button{
+    padding-left: 20px;
+    padding-right: 20px; 
+}
+
+#milk.ticked{
+    text-decoration: line-through;
+}
+
+#bread-button{
+    padding-left: 20px;
+    padding-right: 20px; 
+}
+
+#bread.ticked{
+    text-decoration: line-through;
+}
+
+#eggs-button{
+    padding-left: 20px;
+    padding-right: 20px; 
+}
+
+#eggs.ticked{
+    text-decoration: line-through;
 }
