@@ -10,21 +10,15 @@ const setUp = () => {
   var breadButton = document.getElementById("bread-button");
   var eggs = document.getElementById("eggs");
   var eggsButton = document.getElementById("eggs-button");
+  
+  function ticked(btn, item){
+      btn.disabled = true;
+      item.className = "ticked";
+    }
 
-  milkButton.onclick = function(){
-     milkButton.disabled = true;
-     milk.className = "ticked";
-  }
-
-  breadButton.onclick = function(){
-    breadButton.disabled = true;
-    bread.className = "ticked";
- }
-
- eggsButton.onclick = function(){
-    eggsButton.disabled = true;
-    eggs.className = "ticked";
- }
+  milkButton.onclick = function(){ticked(milkButton, milk)};
+  breadButton.onclick = function(){ticked(breadButton, bread)};
+  eggsButton.onclick = function(){ticked(eggsButton, eggs)};
 
   console.log("We're set up and ready to rumble!")
 };
