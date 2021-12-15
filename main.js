@@ -13,7 +13,7 @@ const items = [
     },
     {
         name: "Eggs",
-        checked: false,
+        checked: false, //update field in const tick
     },
 ];
 
@@ -25,24 +25,38 @@ const tick = (btn, item) => {
 const addItem = (ev)=>{
     ev.preventDefault();
 
-    var itemName = document.getElementById('new-item').value; //== variable types are the same , === values are the same
-    var inputValidator = /[A-Za-z]+/    //** 0 or infinate times for astrick + plus sign is at least 1 or infinate times 
+    var itemName = document.getElementById('new-item').value;
+    var inputValidator = /[A-Za-z]+/
+    
     if(itemName !== '' && inputValidator.test(itemName)){
+
         let item = {
-        
+
             name: itemName,
             checked: false
         }
-    
+        
         items.push(item);
         renderShoppingItem(items.length-1);
-        document.forms[0].reset(); //verify if user is inutting an empty string
+        document.forms[0].reset();
     }
     else{
         window.alert("Please enter a value")
     }
 }
 
+const renderItemName = (item, div) => {
+    item.span = document.createElement("span");
+    item.span.textContent = item.name;    
+    div.appendChild(item.span);
+}
+
+const renderTickButton = (item, div) => {
+    item.button = document.createElement("button");
+    item.button.onclick = function(){tick(item.button, item.span)}
+    item.button.textContent = "Tick!";
+    div.appendChild(item.button);
+}
 
 const renderShoppingItem = (index) => {
     var item = items[index];
@@ -50,19 +64,11 @@ const renderShoppingItem = (index) => {
     div.className = "item";
     document.body.appendChild(div);
 
-    item.span = document.createElement("span"); //refactor into it's own function
-    item.span.textContent = item.name;    
-    div.appendChild(item.span);
-
-    item.button = document.createElement("button"); //refactor into it's own function
-    item.button.onclick = function(){tick(item.button, item.span)}
-    item.button.textContent = "Tick!";
-    div.appendChild(item.button);
+    renderItemName(item, div);
+    renderTickButton(item, div);
 }
 
 const setUp = () => {
-
-    //document.getElementById('add-me-button').addEventListener('click', addItem);
 
     var addBtn = document.getElementById('add-me-button');
     addBtn.addEventListener('click', addItem);
