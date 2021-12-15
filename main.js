@@ -15,48 +15,55 @@ const items = [
         name: "Eggs",
         checked: false,
     },
-]; //ad me button would add item to array  - input validation so empty string cannot be added
+];
 
 const tick = (btn, item) => {
     btn.disabled = true;
     item.className = "ticked";
   }
 
-/* const addItem = (ev)=>{
-    ev.preventDefault()
-} */
+const addItem = (ev)=>{
+    ev.preventDefault();
+
+    var itemName = document.getElementById('new-item').value;
+
+    let item = {
+        
+        name: itemName,
+        checked: false
+    }
+    items.push(item);
+    renderShoppingItem(items.length-1);
+    document.forms[0].reset();
+}
+
+const renderShoppingItem = (index) => {
+    var item = items[index];
+    var div = document.createElement("div");
+    div.className = "item";
+    document.body.appendChild(div);
+
+    item.span = document.createElement("span");
+    item.span.textContent = item.name;
+    div.appendChild(item.span);
+
+    item.button = document.createElement("button");
+    item.button.onclick = function(){tick(item.button, item.span)}
+    item.button.textContent = "Tick!";
+    div.appendChild(item.button);
+}
 
 const setUp = () => {
 
+    //document.getElementById('add-me-button').addEventListener('click', addItem);
+
+    var addBtn = document.getElementById('add-me-button');
+    addBtn.addEventListener('click', addItem);
+    
     for(let i=0; i<items.length; i++){
-
-        var div = document.createElement("div");
-        items[i].span = document.createElement("span");
-        items[i].button = document.createElement("button");
-        
-        div.className = "item";
-        items[i].span.textContent = items[i].name;
-
-        items[i].button.onclick = function(){tick(items[i].button, items[i].span)}
-        items[i].button.textContent = "Tick!";
-        
-        div.appendChild(items[i].span);
-        div.appendChild(items[i].button);
-        document.body.appendChild(div);
+        renderShoppingItem(i);
+        console.log(items[i]);
     }
-
-   /* for(let i=0; i<items.length; i++){
-
-        items[i].button.onclick = function(){tick(items[i].button, items[i].span)}
-    }  */
-
-    //button.onclick = function(){tick(button, span)};
-
-   /*  document.addEventListener('DOMContentoaded', ()=>{
-        document.getElementById('add-me-button').addEventListener('click', addItem)
-    })
-   
- */
 
   console.log("We're set up and ready to rumble!")
 };
